@@ -28,6 +28,7 @@ void Game::gameLoop() {
     Graphics graphics;
     Input input;
     SDL_Event event;
+    this->player = Sprite(graphics, "content/sprites/Characters.png", 0, 64, 16, 16, 100, 100);
 
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
@@ -57,13 +58,22 @@ void Game::gameLoop() {
 
         const float CURRENT_TIME_MS = SDL_GetTicks();
         float ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
-        this->update(std::min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
+
+        this->update(ELAPSED_TIME_MS);
+        this->elapsedTime = ELAPSED_TIME_MS;
+
         LAST_UPDATE_TIME = CURRENT_TIME_MS;
+
+        this->draw(graphics);
     }
 }
 
 void Game::draw(Graphics &graphics) {
+    graphics.clear();
 
+    this->player.draw(graphics, 100, 100);
+
+    graphics.flip();
 }
 
 void Game::update(float elapsedTime) {

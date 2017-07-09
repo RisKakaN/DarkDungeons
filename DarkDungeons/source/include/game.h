@@ -5,6 +5,8 @@
 #ifndef DARKDUNGEONS_GAME_H
 #define DARKDUNGEONS_GAME_H
 
+#include "sprite.h"
+
 class Graphics;
 
 class Game {
@@ -21,6 +23,8 @@ private:
     void update(float elapsedTime);
 
     float elapsedTime;
+
+    Sprite player;
 };
 
 #endif //DARKDUNGEONS_GAME_H
