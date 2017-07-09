@@ -3,7 +3,7 @@ project(DarkDungeons)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES source/main.cpp source/include/graphics.h source/src/graphics.cpp source/include/game.h source/src/game.cpp source/include/input.h source/src/input.cpp)
 add_executable(DarkDungeons ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DarkDungeons_SOURCE_DIR}/cmake")
@@ -13,6 +13,7 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 include_directories(
+        ${DarkDungeons_SOURCE_DIR}/source/include
         ${SDL2_INCLUDE_DIR}
         ${SDL2_IMAGE_INCLUDE_DIR}
         ${SDL2_TTF_INCLUDE_DIR})
