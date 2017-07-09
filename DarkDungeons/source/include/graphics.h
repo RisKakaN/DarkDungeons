@@ -7,6 +7,7 @@
 
 #include <string>
 #include <map>
+#include <SDL.h>
 
 struct SDL_Window;
 struct SDL_Renderer;

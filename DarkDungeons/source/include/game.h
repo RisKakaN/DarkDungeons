@@ -7,6 +7,7 @@
 
 #include "animatedSprite.h"
 #include "player.h"
+#include "room.h"
 
 class Graphics;
 
@@ -26,6 +27,8 @@ private:
     float elapsedTime;
 
     Player player;
+
+    Room room;
 };
 
 #endif //DARKDUNGEONS_GAME_H

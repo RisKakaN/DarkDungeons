@@ -28,7 +28,10 @@ void Game::gameLoop() {
     Graphics graphics;
     Input input;
     SDL_Event event;
+
     this->player = Player(graphics, Vector2(100, 100));
+
+    this->room = Room("temp", Vector2(100, 100), graphics);
 
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
@@ -83,6 +86,7 @@ void Game::gameLoop() {
 void Game::draw(Graphics &graphics) {
     graphics.clear();
 
+    this->room.draw(graphics);
     this->player.draw(graphics);
 
     graphics.flip();
