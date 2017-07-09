@@ -3,7 +3,7 @@ project(DarkDungeons)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES source/main.cpp source/include/graphics.h source/src/graphics.cpp source/include/game.h source/src/game.cpp source/include/input.h source/src/input.cpp source/include/globals.h source/include/sprite.h source/src/sprite.cpp)
+set(SOURCE_FILES source/main.cpp source/include/graphics.h source/src/graphics.cpp source/include/game.h source/src/game.cpp source/include/input.h source/src/input.cpp source/include/globals.h source/include/sprite.h source/src/sprite.cpp source/include/animatedSprite.h source/src/animatedSprite.cpp)
 add_executable(DarkDungeons ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DarkDungeons_SOURCE_DIR}/cmake")

@@ -6,10 +6,19 @@
 #define DARKDUNGEONS_GLOBALS_H
 
 namespace game_constants {
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 500;
+    const int SCREEN_WIDTH = 600;
+    const int SCREEN_HEIGHT = 500;
 
-const int SPRITE_SCALE = 2;
+    const int SPRITE_SCALE = 2;
+    const int SPRITE_FRAME_SIZE = 16;
 }
+
+struct Vector2 {
+    int x, y;
+
+    Vector2() : x(0), y(0) {}
+
+    Vector2(int x, int y) : x(x), y(y) {}
+};
 
 #endif //DARKDUNGEONS_GLOBALS_H
