@@ -31,7 +31,7 @@ void Game::gameLoop() {
 
     this->player = Player(graphics, Vector2(100, 100));
 
-    this->room = Room("temp", Vector2(100, 100), graphics);
+    this->room = Room("testMap1", Vector2(100, 100), graphics);
 
     float LAST_UPDATE_TIME = SDL_GetTicks();
 

@@ -2,7 +2,7 @@
 // Created by Martin So on 2017-07-09.
 //
 
-#include "animatedsprite.h"
+#include "animatedSprite.h"
 #include "graphics.h"
 
 AnimatedSprite::AnimatedSprite() {}

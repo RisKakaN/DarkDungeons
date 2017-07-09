@@ -6,8 +6,15 @@
 #define DARKDUNGEONS_ROOM_H
 
 #include <string>
+#include <vector>
+
 #include "globals.h"
-#include "graphics.h"
+#include "tile.h"
+
+class Graphics;
+
+struct SDL_Rect;
+struct Tileset;
 
 class Room {
 public:
@@ -18,8 +25,6 @@ public:
 
     ~Room();
 
-    void update(float elapsedTime);
-
     void draw(Graphics &graphics);
 
 private:
@@ -27,9 +32,29 @@ private:
     Vector2 spawnPoint;
 
     Vector2 size;
+    Vector2 tileSize;
+
     SDL_Texture *backgroundTexture;
 
+    std::vector<Tile> tileList;
+    std::vector<Tileset> tilesets;
+
     void loadMap(std::string roomName, Graphics &graphics);
+};
+
+// Tileset structure
+struct Tileset {
+    SDL_Texture *Texture;
+    int FirstGid;
+
+    Tileset() {
+        this->FirstGid = -1;
+    }
+
+    Tileset(SDL_Texture *texture, int firstGid) {
+        this->Texture = texture;
+        this->FirstGid = firstGid;
+    }
 };
 
 #endif //DARKDUNGEONS_ROOM_H
