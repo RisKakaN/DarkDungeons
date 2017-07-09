@@ -28,9 +28,7 @@ void Game::gameLoop() {
     Graphics graphics;
     Input input;
     SDL_Event event;
-    this->player = AnimatedSprite(graphics, "content/sprites/Characters.png", 0, 64, 16, 16, 100, 100, 100);
-    this->player.setupAnimations();
-    this->player.playAnimation("RunRight");
+    this->player = Player(graphics, Vector2(100, 100));
 
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
@@ -56,6 +54,18 @@ void Game::gameLoop() {
         }
         if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE)) {
             return;
+        } else if (input.isKeyHeld(SDL_SCANCODE_UP)) {
+            this->player.moveUp(this->elapsedTime);
+        } else if (input.isKeyHeld(SDL_SCANCODE_DOWN)) {
+            this->player.moveDown(this->elapsedTime);
+        } else if (input.isKeyHeld(SDL_SCANCODE_LEFT)) {
+            this->player.moveLeft(this->elapsedTime);
+        } else if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) {
+            this->player.moveRight(this->elapsedTime);
+        }
+        if (!input.isKeyHeld(SDL_SCANCODE_LEFT) && !input.isKeyHeld(SDL_SCANCODE_RIGHT)
+            && !input.isKeyHeld(SDL_SCANCODE_UP) && !input.isKeyHeld(SDL_SCANCODE_DOWN)) {
+            this->player.stopMoving();
         }
 
         const float CURRENT_TIME_MS = SDL_GetTicks();
@@ -73,7 +83,7 @@ void Game::gameLoop() {
 void Game::draw(Graphics &graphics) {
     graphics.clear();
 
-    this->player.draw(graphics, 100, 100);
+    this->player.draw(graphics);
 
     graphics.flip();
 }

@@ -70,10 +70,3 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y) {
         graphics.blitSurface(this->spriteSheet, &sourceRect, &destinationRectangle);
     }
 }
-
-void AnimatedSprite::setupAnimations() {
-    this->addAnimation(2, 6, 0, "RunLeft", game_constants::SPRITE_FRAME_SIZE, game_constants::SPRITE_FRAME_SIZE,
-                       Vector2(0, 0));
-    this->addAnimation(2, 4, 0, "RunRight", game_constants::SPRITE_FRAME_SIZE, game_constants::SPRITE_FRAME_SIZE,
-                       Vector2(0, 0));
-    }

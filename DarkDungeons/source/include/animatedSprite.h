@@ -29,7 +29,7 @@ public:
 
     void draw(Graphics &graphics, int x, int y);
 
-    virtual void setupAnimations();
+
 
 protected:
     double timeToUpdate;
@@ -44,6 +44,8 @@ protected:
     void stopAnimation();
 
     void setVisible(bool visible);
+
+    virtual void setupAnimations() = 0;
 
 private:
     std::map<std::string, std::vector<SDL_Rect>> animations;

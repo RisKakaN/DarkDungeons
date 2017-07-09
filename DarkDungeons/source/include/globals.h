@@ -13,6 +13,13 @@ namespace game_constants {
     const int SPRITE_FRAME_SIZE = 16;
 }
 
+enum Direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+};
+
 struct Vector2 {
     int x, y;
 

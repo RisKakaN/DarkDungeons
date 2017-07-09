@@ -6,6 +6,7 @@
 #define DARKDUNGEONS_GAME_H
 
 #include "animatedSprite.h"
+#include "player.h"
 
 class Graphics;
 
@@ -24,7 +25,7 @@ private:
 
     float elapsedTime;
 
-    AnimatedSprite player;
+    Player player;
 };
 
 #endif //DARKDUNGEONS_GAME_H
