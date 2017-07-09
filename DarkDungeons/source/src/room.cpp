@@ -3,6 +3,7 @@
 //
 
 #include <room.h>
+#include "tinyxml2.h"
 
 Room::Room() {}
 

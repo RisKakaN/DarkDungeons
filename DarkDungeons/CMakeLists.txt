@@ -14,6 +14,7 @@ find_package(SDL2_ttf REQUIRED)
 
 include_directories(
         ${DarkDungeons_SOURCE_DIR}/source/include
+        ${DarkDungeons_SOURCE_DIR}/source/tinyxml2Lib
         ${SDL2_INCLUDE_DIR}
         ${SDL2_IMAGE_INCLUDE_DIR}
         ${SDL2_TTF_INCLUDE_DIR})
