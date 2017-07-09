@@ -3,7 +3,7 @@ project(DarkDungeons)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES source/main.cpp source/tinyxml2Lib/tinyxml2.h source/tinyxml2Lib/tinyxml2.cpp source/include/graphics.h source/src/graphics.cpp source/include/game.h source/src/game.cpp source/include/input.h source/src/input.cpp source/include/globals.h source/include/sprite.h source/src/sprite.cpp source/include/animatedSprite.h source/src/animatedSprite.cpp source/include/player.h source/src/player.cpp source/include/room.h source/src/room.cpp source/include/tile.h source/src/tile.cpp)
+set(SOURCE_FILES source/main.cpp source/tinyxml2Lib/tinyxml2.h source/tinyxml2Lib/tinyxml2.cpp source/include/graphics.h source/src/graphics.cpp source/include/game.h source/src/game.cpp source/include/input.h source/src/input.cpp source/include/globals.h source/include/sprite.h source/src/sprite.cpp source/include/animatedSprite.h source/src/animatedSprite.cpp source/include/player.h source/src/player.cpp source/include/room.h source/src/room.cpp source/include/tile.h source/src/tile.cpp source/include/rectangle.h)
 add_executable(DarkDungeons ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DarkDungeons_SOURCE_DIR}/cmake")

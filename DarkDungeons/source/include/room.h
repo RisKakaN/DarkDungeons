@@ -25,7 +25,13 @@ public:
 
     ~Room();
 
+    void update(float elapsedTime);
+
     void draw(Graphics &graphics);
+
+    std::vector<Rectangle> checkTileCollisions(const Rectangle &other);
+
+    const Vector2 getPlayerSpawnPoint() const;
 
 private:
     std::string roomName;
@@ -38,6 +44,7 @@ private:
 
     std::vector<Tile> tileList;
     std::vector<Tileset> tilesets;
+    std::vector<Rectangle> collisionRects;
 
     void loadMap(std::string roomName, Graphics &graphics);
 };

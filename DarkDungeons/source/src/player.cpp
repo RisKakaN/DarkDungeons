@@ -7,13 +7,15 @@
 
 
 namespace player_constants {
-    const float WALK_SPEED = 0.1f;
+    const float WALK_SPEED = 0.3f;
 }
 
 Player::Player() {}
 
 Player::Player(Graphics &graphics, Vector2 spawnPoint) : AnimatedSprite(graphics, "content/sprites/Characters.png", 0,
-                                                                        4 * game_constants::SPRITE_FRAME_SIZE, 16, 16, spawnPoint.x, spawnPoint.y, 100), facing(RIGHT){
+                                                                        4 * game_constants::SPRITE_FRAME_SIZE, 16, 16,
+                                                                        spawnPoint.x, spawnPoint.y, 100),
+                                                         facing(RIGHT) {
     this->setupAnimations();
 }
 
@@ -74,6 +76,29 @@ void Player::stopMoving() {
         case RIGHT:
             playAnimation("IdleRight");
             break;
+    }
+}
+
+// Handles collisions with ALL tiles the player is colliding with.
+void Player::handleTileCollisions(std::vector<Rectangle> &others) {
+    // Figure out what side the collision happened on and move the player accordingly.
+    for (int i = 0; i < others.size(); i++) {
+        sides::Side collisionSide = this->getCollisionSide(others.at(i));
+        if (collisionSide != sides::NONE) {
+            switch (collisionSide) {
+                case sides::NORTH :
+                    this->y = others.at(i).getSouth() + 1;
+                    break;
+                case sides::SOUTH:
+                    this->y = others.at(i).getNorth() - this->boundingBox.getHeight() - 1;
+                    break;
+                case sides::WEST:
+                    this->x = others.at(i).getEast() + 1;
+                    break;
+                case sides::EAST:
+                    this->x = others.at(i).getWest() - this->boundingBox.getWidth() - 1;
+            }
+        }
     }
 }
 

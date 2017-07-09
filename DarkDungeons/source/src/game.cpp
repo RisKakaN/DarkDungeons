@@ -94,4 +94,11 @@ void Game::draw(Graphics &graphics) {
 
 void Game::update(float elapsedTime) {
     this->player.update(elapsedTime);
+
+    //Check collisions
+    	std::vector<Rectangle> others;
+    	if ((others = this->room.checkTileCollisions(this->player.getBoundingBox())).size() > 0) {
+        		//Player collided with at least one tile. Handle it.
+                this->player.handleTileCollisions(others);
+        }
 }

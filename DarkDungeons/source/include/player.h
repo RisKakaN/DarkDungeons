@@ -35,6 +35,8 @@ public:
 
     virtual void setupAnimations();
 
+    void handleTileCollisions(std::vector<Rectangle> &others);
+
 private:
     Direction facing;
 

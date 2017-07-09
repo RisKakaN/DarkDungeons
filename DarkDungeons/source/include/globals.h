@@ -20,6 +20,16 @@ enum Direction {
     RIGHT,
 };
 
+namespace sides {
+    enum Side {
+        NORTH,
+        SOUTH,
+        WEST,
+        EAST,
+        NONE
+    };
+}
+
 struct Vector2 {
     int x, y;
 
