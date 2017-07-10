@@ -8,8 +8,8 @@
 #include "animatedSprite.h"
 #include "player.h"
 #include "room.h"
+#include "graphics.h"
 
-class Graphics;
 
 class Game {
 public:
@@ -29,6 +29,8 @@ private:
     Player player;
 
     Room room;
+
+    Graphics graphics;
 };
 
 #endif //DARKDUNGEONS_GAME_H

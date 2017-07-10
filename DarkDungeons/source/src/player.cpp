@@ -15,7 +15,7 @@ Player::Player() {}
 Player::Player(Graphics &graphics, Vector2 spawnPoint) : AnimatedSprite(graphics, "content/sprites/Characters.png", 0,
                                                                         4 * game_constants::SPRITE_FRAME_SIZE, 16, 16,
                                                                         spawnPoint.x, spawnPoint.y, 100),
-                                                         facing(RIGHT) {
+                                                         facing(RIGHT), isInteracting(false) {
     this->setupAnimations();
 }
 
@@ -79,6 +79,15 @@ void Player::stopMoving() {
     }
 }
 
+void Player::interact() {
+    this->isInteracting = true;
+    // TODO: Might need some animation.
+}
+
+void Player::stopInteract() {
+    this->isInteracting = false;
+}
+
 // Handles collisions with ALL tiles the player is colliding with.
 void Player::handleTileCollisions(std::vector<Rectangle> &others) {
     // Figure out what side the collision happened on and move the player accordingly.
@@ -98,6 +107,18 @@ void Player::handleTileCollisions(std::vector<Rectangle> &others) {
                 case sides::EAST:
                     this->x = others.at(i).getWest() - this->boundingBox.getWidth() - 1;
             }
+        }
+    }
+}
+
+void Player::handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics) {
+    //Check if the player is grounded and holding the down arrow.
+    // If so, go through the door, else do nothing.
+    for (int i = 0; i < others.size(); i++) {
+        if(this->isInteracting) {
+            room = Room(others.at(i).getDestination(), graphics);
+            this->x = room.getPlayerSpawnPoint().x;
+            this->y = room.getPlayerSpawnPoint().y;
         }
     }
 }

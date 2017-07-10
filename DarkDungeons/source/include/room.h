@@ -10,6 +10,7 @@
 
 #include "globals.h"
 #include "tile.h"
+#include "door.h"
 
 class Graphics;
 
@@ -30,6 +31,7 @@ public:
     void draw(Graphics &graphics);
 
     std::vector<Rectangle> checkTileCollisions(const Rectangle &other);
+    std::vector<Door> checkDoorCollisions(const Rectangle &other);
 
     const Vector2 getPlayerSpawnPoint() const;
 
@@ -40,11 +42,11 @@ private:
     Vector2 size;
     Vector2 tileSize;
 
-    SDL_Texture *backgroundTexture;
-
     std::vector<Tile> tileList;
     std::vector<Tileset> tilesets;
     std::vector<Rectangle> collisionRects;
+
+    std::vector<Door> doorList;
 
     void loadMap(std::string roomName, Graphics &graphics);
 };

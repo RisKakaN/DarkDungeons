@@ -6,6 +6,8 @@
 #define DARKDUNGEONS_PLAYER_H
 
 #include "animatedSprite.h"
+#include "door.h"
+#include "room.h"
 
 class Graphics;
 
@@ -33,12 +35,20 @@ public:
 
     void stopMoving();
 
+    void interact();
+
+    void stopInteract();
+
     virtual void setupAnimations();
 
     void handleTileCollisions(std::vector<Rectangle> &others);
 
+    void handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics);
+
 private:
     Direction facing;
+
+    bool isInteracting;
 
 };
 

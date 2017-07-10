@@ -197,6 +197,43 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                         pObject = pObject->NextSiblingElement("object");
                     }
                 }
+            } else if (ss.str() == "door") {
+                XMLElement *pObject = pObjectGroup->FirstChildElement("object");
+                if (pObject != NULL) {
+                    while (pObject) {
+                        float x = pObject->FloatAttribute("x");
+                        float y = pObject->FloatAttribute("y");
+                        float w = pObject->FloatAttribute("width");
+                        float h = pObject->FloatAttribute("height");
+                        Rectangle rect = Rectangle(x, y, w, h);
+
+                        XMLElement *pProperties = pObject->FirstChildElement("properties");
+                        if (pProperties != NULL) {
+                            while (pProperties) {
+                                XMLElement *pProperty = pProperties->FirstChildElement("property");
+                                if (pProperty != NULL) {
+                                    while (pProperty) {
+                                        const char *name = pProperty->Attribute("name");
+                                        std::stringstream ss;
+                                        ss << name;
+                                        if (ss.str() == "destination") {
+                                            const char *value = pProperty->Attribute("value");
+                                            std::stringstream ss2;
+                                            ss2 << value;
+                                            Door door = Door(rect, ss2.str());
+                                            this->doorList.push_back(door);
+                                        }
+                                        pProperty = pProperty->NextSiblingElement("property");
+                                    }
+                                }
+
+                                pProperties = pProperties->NextSiblingElement("properties");
+                            }
+                        }
+
+                        pObject = pObject->NextSiblingElement("object");
+                    }
+                }
             }
             pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
         }
@@ -218,6 +255,16 @@ std::vector<Rectangle> Room::checkTileCollisions(const Rectangle &other) {
     for (int i = 0; i < this->collisionRects.size(); i++) {
         if (this->collisionRects.at(i).collidesWith(other)) {
             others.push_back((Rectangle) this->collisionRects.at(i));
+        }
+    }
+    return others;
+}
+
+std::vector<Door> Room::checkDoorCollisions(const Rectangle &other) {
+    std::vector<Door> others;
+    for (int i = 0; i < this->doorList.size(); i++) {
+        if (this->doorList.at(i).collidesWith(other)) {
+            others.push_back((Door) this->doorList.at(i));
         }
     }
     return others;
