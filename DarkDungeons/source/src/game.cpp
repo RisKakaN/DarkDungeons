@@ -29,10 +29,9 @@ void Game::gameLoop() {
     Input input;
     SDL_Event event;
 
-    this->player = Player(graphics, Vector2(100, 100));
 
-    this->room = Room("testMap1", Vector2(100, 100), graphics);
-
+    this->room = Room("testMap1", graphics);
+    this->player = Player(graphics, this->room.getPlayerSpawnPoint());
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
     // Temporary elapsed time.
@@ -96,9 +95,9 @@ void Game::update(float elapsedTime) {
     this->player.update(elapsedTime);
 
     //Check collisions
-    	std::vector<Rectangle> others;
-    	if ((others = this->room.checkTileCollisions(this->player.getBoundingBox())).size() > 0) {
-        		//Player collided with at least one tile. Handle it.
-                this->player.handleTileCollisions(others);
-        }
+    std::vector<Rectangle> others;
+    if ((others = this->room.checkTileCollisions(this->player.getBoundingBox())).size() > 0) {
+        //Player collided with at least one tile. Handle it.
+        this->player.handleTileCollisions(others);
+    }
 }

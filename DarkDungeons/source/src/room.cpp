@@ -15,7 +15,7 @@ using namespace tinyxml2;
 
 Room::Room() {}
 
-Room::Room(std::string roomName, Vector2 spawnpoint, Graphics &graphics) :
+Room::Room(std::string roomName, Graphics &graphics) :
         roomName(roomName),
         spawnPoint(spawnPoint),
         size(Vector2(0, 0)) {
@@ -177,6 +177,23 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                                 std::ceil(height) * game_constants::SPRITE_SCALE
                         ));
 
+                        pObject = pObject->NextSiblingElement("object");
+                    }
+                }
+                // Other objectgroups.
+            } else if (ss.str() == "spawnPoint") {
+                XMLElement *pObject = pObjectGroup->FirstChildElement("object");
+                if (pObject != NULL) {
+                    while (pObject) {
+                        float x = pObject->FloatAttribute("x");
+                        float y = pObject->FloatAttribute("y");
+                        const char *name = pObject->Attribute("name");
+                        std::stringstream ss;
+                        ss << name;
+                        if (ss.str() == "player") {
+                            this->spawnPoint = Vector2(std::ceil(x) * game_constants::SPRITE_SCALE,
+                                                       std::ceil(y) * game_constants::SPRITE_SCALE);
+                        }
                         pObject = pObject->NextSiblingElement("object");
                     }
                 }

@@ -21,7 +21,7 @@ public:
     Room();
 
     // Take in file name.
-    Room(std::string roomName, Vector2 spawnPoint, Graphics &graphics);
+    Room(std::string roomName, Graphics &graphics);
 
     ~Room();
 
