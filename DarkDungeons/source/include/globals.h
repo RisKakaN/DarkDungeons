@@ -10,6 +10,7 @@ namespace game_constants {
     const int SCREEN_HEIGHT = 500;
 
     const int SPRITE_SCALE = 2;
+    const int TILE_SCALE = 1;
     const int SPRITE_FRAME_SIZE = 16;
 }
 

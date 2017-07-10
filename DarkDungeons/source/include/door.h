@@ -13,8 +13,8 @@ public:
     Door() {}
 
     Door(Rectangle r, std::string destination) :
-            Rectangle(r.getWest() * game_constants::SPRITE_SCALE, r.getNorth() * game_constants::SPRITE_SCALE,
-                      r.getWidth() * game_constants::SPRITE_SCALE, r.getHeight() * game_constants::SPRITE_SCALE),
+            Rectangle(r.getWest() * game_constants::TILE_SCALE, r.getNorth() * game_constants::TILE_SCALE,
+                      r.getWidth() * game_constants::TILE_SCALE, r.getHeight() * game_constants::TILE_SCALE),
             destination(destination) {}
 
     const inline std::string getDestination() const {

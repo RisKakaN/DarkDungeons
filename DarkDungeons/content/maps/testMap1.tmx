@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="12">
  <tileset firstgid="1" name="DungeonTileSet" tilewidth="16" tileheight="16" tilecount="12288">
+  <image source="../tilesets/DungeonTileSet.png" width="2048" height="1536"/>
+ </tileset>
+ <tileset firstgid="12289" name="test" tilewidth="8" tileheight="8" tilecount="49152">
   <image source="../tilesets/DungeonTileSet.png" width="2048" height="1536"/>
  </tileset>
  <layer name="Tile Layer 1" width="10" height="10">
@@ -114,9 +117,7 @@
   <object id="5" x="144" y="16" width="16" height="128"/>
  </objectgroup>
  <objectgroup color="#2aa913" name="spawnPoint">
-  <object id="6" name="player" x="116.097" y="124.36" width="4.95786" height="4.95786">
-   <ellipse/>
-  </object>
+  <object id="11" name="player" x="112" y="112" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="door">
   <object id="7" x="18.592" y="19.0051" width="26.8551" height="26.4419">

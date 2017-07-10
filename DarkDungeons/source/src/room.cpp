@@ -171,10 +171,10 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                         height = pObject->FloatAttribute("height");
                         this->collisionRects.push_back(Rectangle(
                                 // ceil rounds up to closest int.
-                                std::ceil(x) * game_constants::SPRITE_SCALE,
-                                std::ceil(y) * game_constants::SPRITE_SCALE,
-                                std::ceil(width) * game_constants::SPRITE_SCALE,
-                                std::ceil(height) * game_constants::SPRITE_SCALE
+                                std::ceil(x) * game_constants::TILE_SCALE,
+                                std::ceil(y) * game_constants::TILE_SCALE,
+                                std::ceil(width) * game_constants::TILE_SCALE,
+                                std::ceil(height) * game_constants::TILE_SCALE
                         ));
 
                         pObject = pObject->NextSiblingElement("object");
@@ -191,8 +191,8 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                         std::stringstream ss;
                         ss << name;
                         if (ss.str() == "player") {
-                            this->spawnPoint = Vector2(std::ceil(x) * game_constants::SPRITE_SCALE,
-                                                       std::ceil(y) * game_constants::SPRITE_SCALE);
+                            this->spawnPoint = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                       std::ceil(y) * game_constants::TILE_SCALE);
                         }
                         pObject = pObject->NextSiblingElement("object");
                     }
