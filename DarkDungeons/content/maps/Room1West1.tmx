@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" nextobjectid="17">
  <tileset firstgid="1" name="DungeonTileSet" tilewidth="16" tileheight="16" tilecount="12288">
   <image source="../tilesets/DungeonTileSet.png" width="2048" height="1536"/>
  </tileset>
@@ -2728,5 +2728,10 @@
     <property name="position" value="east"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="enemy">
+  <object id="13" name="enemyLevel1" x="224" y="224" width="32" height="32"/>
+  <object id="15" name="enemyLevel1" x="224" y="320" width="32" height="32"/>
+  <object id="16" name="enemyLevel1" x="224" y="96" width="32" height="32"/>
  </objectgroup>
 </map>

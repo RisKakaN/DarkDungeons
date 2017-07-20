@@ -45,6 +45,14 @@ public:
 
     void handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics);
 
+    const inline int getPlayerX() const {
+        return this->x;
+    }
+
+    const inline int getPlayerY() const {
+        return this->y;
+    }
+
 private:
     Direction facing;
 

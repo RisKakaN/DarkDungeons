@@ -107,6 +107,7 @@ void Game::draw(Graphics &graphics) {
 
 void Game::update(float elapsedTime) {
     this->player.update(elapsedTime);
+    this->room.update(elapsedTime, this->player);
 
     //Check collisions
     std::vector<Rectangle> others;

@@ -7,10 +7,14 @@
 #include <rectangle.h>
 #include <cmath>
 #include <iostream>
+#include <enemyLevel1.h>
 
 #include "room.h"
 #include "tinyxml2.h"
 #include "graphics.h"
+#include "player.h"
+#include "enemy.h"
+#include "enemyLevel1.h"
 
 using namespace tinyxml2;
 
@@ -256,19 +260,46 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                         pObject = pObject->NextSiblingElement("object");
                     }
                 }
+            } else if (ss.str() == "enemy") {
+                float x, y;
+                XMLElement *pObject = pObjectGroup->FirstChildElement("object");
+                if (pObject != NULL) {
+                    while (pObject) {
+                        x = pObject->FloatAttribute("x");
+                        y = pObject->FloatAttribute("y");
+                        const char *name = pObject->Attribute("name");
+                        std::stringstream ss;
+                        ss << name;
+                        if (ss.str() == "enemyLevel1") {
+                            this->enemies.push_back(std::make_shared<EnemyLevel1>(graphics, Vector2(std::floor(x) *
+                                                                                                    game_constants::TILE_SCALE,
+                                                                                                    +std::floor(y) *
+                                                                                                    game_constants::TILE_SCALE)));
+                        }
+
+                        pObject = pObject->NextSiblingElement("object");
+                    }
+                }
             }
+
             pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
         }
     }
 }
 
-void Room::update(float elapsedTime) {
-
+void Room::update(float elapsedTime, Player &player) {
+    for (int i = 0; i < this->enemies.size(); i++) {
+        this->enemies.at(i)->update(elapsedTime, player);
+    }
 }
 
 void Room::draw(Graphics &graphics) {
     for (int i = 0; i < this->tileList.size(); i++) {
         this->tileList.at(i).draw(graphics);
+    }
+
+    for (int i = 0; i < this->enemies.size(); i++) {
+        this->enemies.at(i)->draw(graphics);
     }
 }
 

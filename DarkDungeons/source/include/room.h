@@ -13,6 +13,8 @@
 #include "door.h"
 
 class Graphics;
+class Enemy;
+class Player;
 
 struct SDL_Rect;
 struct Tileset;
@@ -26,7 +28,7 @@ public:
 
     ~Room();
 
-    void update(float elapsedTime);
+    void update(float elapsedTime, Player &player);
 
     void draw(Graphics &graphics);
 
@@ -54,6 +56,8 @@ private:
     std::vector<Rectangle> collisionRects;
 
     std::vector<Door> doorList;
+
+    std::vector<std::shared_ptr<Enemy>> enemies;
 
     void loadMap(std::string roomName, Graphics &graphics);
 };

@@ -7,13 +7,13 @@
 #include "globals.h"
 
 
-namespace player_constants {
+namespace enemy_constants {
     const float WALK_SPEED = 0.3f;
 }
 
 Player::Player() {}
 
-Player::Player(Graphics &graphics, Vector2 spawnPoint) : AnimatedSprite(graphics, "content/sprites/Characters.png", 0,
+Player::Player(Graphics &graphics, Vector2 spawnPoint) : AnimatedSprite(graphics, "content/sprites/characters1.png", 0,
                                                                         4 * game_constants::SPRITE_FRAME_SIZE, 16, 16,
                                                                         spawnPoint.x, spawnPoint.y, 100),
                                                          facing(RIGHT), isInteracting(false) {
@@ -40,25 +40,25 @@ void Player::setupAnimations() {
 }
 
 void Player::moveUp(float elapsedTime) {
-    this->y -= player_constants::WALK_SPEED * elapsedTime;
+    this->y -= enemy_constants::WALK_SPEED * elapsedTime;
     this->playAnimation("RunUp");
     this->facing = UP;
 }
 
 void Player::moveDown(float elapsedTime) {
-    this->y += player_constants::WALK_SPEED * elapsedTime;
+    this->y += enemy_constants::WALK_SPEED * elapsedTime;
     this->playAnimation("RunDown");
     this->facing = DOWN;
 }
 
 void Player::moveLeft(float elapsedTime) {
-    this->x -= player_constants::WALK_SPEED * elapsedTime;
+    this->x -= enemy_constants::WALK_SPEED * elapsedTime;
     this->playAnimation("RunLeft");
     this->facing = LEFT;
 }
 
 void Player::moveRight(float elapsedTime) {
-    this->x += player_constants::WALK_SPEED * elapsedTime;
+    this->x += enemy_constants::WALK_SPEED * elapsedTime;
     this->playAnimation("RunRight");
     this->facing = RIGHT;
 }
