@@ -2,6 +2,7 @@
 // Created by Martin So on 2017-07-09.
 //
 
+#include <iostream>
 #include "player.h"
 #include "globals.h"
 
@@ -112,11 +113,9 @@ void Player::handleTileCollisions(std::vector<Rectangle> &others) {
 }
 
 void Player::handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics) {
-    //Check if the player is grounded and holding the down arrow.
-    // If so, go through the door, else do nothing.
     for (int i = 0; i < others.size(); i++) {
         if(this->isInteracting) {
-            room = Room(others.at(i).getDestination(), graphics);
+            room = Room(others.at(i).getDestination(), others.at(i).getPosition(), graphics);
             this->x = room.getPlayerSpawnPoint().x;
             this->y = room.getPlayerSpawnPoint().y;
         }

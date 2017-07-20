@@ -6,8 +6,8 @@
 #define DARKDUNGEONS_GLOBALS_H
 
 namespace game_constants {
-    const int SCREEN_WIDTH = 600;
-    const int SCREEN_HEIGHT = 500;
+    const int SCREEN_WIDTH = 720;
+    const int SCREEN_HEIGHT = 480;
 
     const int SPRITE_SCALE = 2;
     const int TILE_SCALE = 1;

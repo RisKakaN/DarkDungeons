@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <rectangle.h>
 #include <cmath>
+#include <iostream>
 
 #include "room.h"
 #include "tinyxml2.h"
@@ -15,9 +16,9 @@ using namespace tinyxml2;
 
 Room::Room() {}
 
-Room::Room(std::string roomName, Graphics &graphics) :
+Room::Room(std::string roomName, std::string spawnPosition, Graphics &graphics) :
         roomName(roomName),
-        spawnPoint(spawnPoint),
+        spawnPosition(spawnPosition),
         size(Vector2(0, 0)) {
     this->loadMap(roomName, graphics);
 }
@@ -160,7 +161,7 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
             const char *name = pObjectGroup->Attribute("name");
             std::stringstream ss;
             ss << name;
-            if (ss.str() == "collisions") {
+            if (ss.str() == "collision") {
                 XMLElement *pObject = pObjectGroup->FirstChildElement("object");
                 if (pObject != NULL) {
                     while (pObject) {
@@ -190,9 +191,21 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                         const char *name = pObject->Attribute("name");
                         std::stringstream ss;
                         ss << name;
-                        if (ss.str() == "player") {
-                            this->spawnPoint = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
-                                                       std::ceil(y) * game_constants::TILE_SCALE);
+                        if (ss.str() == "spawnPointStart") {
+                            this->spawnPointStart = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                            std::ceil(y) * game_constants::TILE_SCALE);
+                        } else if (ss.str() == "spawnPointNorth") {
+                            this->spawnPointNorth = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                            std::ceil(y) * game_constants::TILE_SCALE);
+                        } else if (ss.str() == "spawnPointSouth") {
+                            this->spawnPointSouth = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                            std::ceil(y) * game_constants::TILE_SCALE);
+                        } else if (ss.str() == "spawnPointWest") {
+                            this->spawnPointWest = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                           std::ceil(y) * game_constants::TILE_SCALE);
+                        } else if (ss.str() == "spawnPointEast") {
+                            this->spawnPointEast = Vector2(std::ceil(x) * game_constants::TILE_SCALE,
+                                                           std::ceil(y) * game_constants::TILE_SCALE);
                         }
                         pObject = pObject->NextSiblingElement("object");
                     }
@@ -215,15 +228,24 @@ void Room::loadMap(std::string mapName, Graphics &graphics) {
                                     while (pProperty) {
                                         const char *name = pProperty->Attribute("name");
                                         std::stringstream ss;
+                                        std::stringstream ssDest;
+                                        std::stringstream ssPos;
                                         ss << name;
                                         if (ss.str() == "destination") {
                                             const char *value = pProperty->Attribute("value");
-                                            std::stringstream ss2;
-                                            ss2 << value;
-                                            Door door = Door(rect, ss2.str());
-                                            this->doorList.push_back(door);
+                                            ssDest << value;
                                         }
                                         pProperty = pProperty->NextSiblingElement("property");
+                                        const char *name1 = pProperty->Attribute("name");
+                                        std::stringstream ss1;
+                                        ss1 << name1;
+                                        if (ss1.str() == "position") {
+                                            const char *value = pProperty->Attribute("value");
+                                            ssPos << value;
+                                        }
+                                        pProperty = pProperty->NextSiblingElement("property");
+                                        Door door = Door(rect, ssDest.str(), ssPos.str());
+                                        this->doorList.push_back(door);
                                     }
                                 }
 
@@ -271,5 +293,9 @@ std::vector<Door> Room::checkDoorCollisions(const Rectangle &other) {
 }
 
 const Vector2 Room::getPlayerSpawnPoint() const {
-    return this->spawnPoint;
+    return spawnPosition == "north" ? this->spawnPointSouth :
+           spawnPosition == "south" ? this->spawnPointNorth :
+           spawnPosition == "west" ? this->spawnPointEast :
+           spawnPosition == "east" ? this->spawnPointWest :
+           this->spawnPointStart;
 }

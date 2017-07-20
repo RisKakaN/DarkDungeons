@@ -22,7 +22,7 @@ public:
     Room();
 
     // Take in file name.
-    Room(std::string roomName, Graphics &graphics);
+    Room(std::string roomName, std::string spawnPosition, Graphics &graphics);
 
     ~Room();
 
@@ -37,7 +37,14 @@ public:
 
 private:
     std::string roomName;
-    Vector2 spawnPoint;
+    std::string spawnPosition;
+
+    Vector2 spawnPointStart;
+    // Spawn position is determined by which door the player arrives to.
+    Vector2 spawnPointNorth;
+    Vector2 spawnPointSouth;
+    Vector2 spawnPointWest;
+    Vector2 spawnPointEast;
 
     Vector2 size;
     Vector2 tileSize;

@@ -31,7 +31,7 @@ void Game::gameLoop() {
     SDL_Event event;
 
 
-    this->room = Room("testMap1", graphics);
+    this->room = Room("Room1Center", "start", graphics);
     this->player = Player(graphics, this->room.getPlayerSpawnPoint());
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
