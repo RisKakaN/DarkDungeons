@@ -30,11 +30,12 @@ void Enemy::draw(Graphics &graphics) {
 bool Enemy::playerInRange(Player &player) {
     if(chasing) {
         return true;
-    }
-    if (std::fabs(this->x - player.getPlayerX()) <= 5 * game_constants::SPRITE_FRAME_SIZE &&
+    } else if (std::fabs(this->x - player.getPlayerX()) <= 5 * game_constants::SPRITE_FRAME_SIZE &&
         std::fabs(this->y - player.getPlayerY() <= 5 * game_constants::SPRITE_FRAME_SIZE)) {
         chasing = true;
         return true;
+    } else {
+        return false;
     }
 }
 

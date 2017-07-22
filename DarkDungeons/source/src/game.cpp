@@ -33,6 +33,8 @@ void Game::gameLoop() {
 
     this->room = Room("Room1Center", "start", graphics);
     this->player = Player(graphics, this->room.getPlayerSpawnPoint());
+    this->hud = Hud(graphics, this->player);
+
     float LAST_UPDATE_TIME = SDL_GetTicks();
 
     // Temporary elapsed time.
@@ -101,6 +103,7 @@ void Game::draw(Graphics &graphics) {
 
     this->room.draw(graphics);
     this->player.draw(graphics);
+    this->hud.draw(graphics);
 
     graphics.flip();
 }
@@ -108,6 +111,7 @@ void Game::draw(Graphics &graphics) {
 void Game::update(float elapsedTime) {
     this->player.update(elapsedTime);
     this->room.update(elapsedTime, this->player);
+    this->hud.update(elapsedTime);
 
     //Check collisions
     std::vector<Rectangle> others;

@@ -16,7 +16,9 @@ Player::Player() {}
 Player::Player(Graphics &graphics, Vector2 spawnPoint) : AnimatedSprite(graphics, "content/sprites/characters1.png", 0,
                                                                         4 * game_constants::SPRITE_FRAME_SIZE, 16, 16,
                                                                         spawnPoint.x, spawnPoint.y, 100),
-                                                         facing(RIGHT), isInteracting(false) {
+                                                         facing(RIGHT), isInteracting(false), maxHealth(100),
+                                                         currentHealth(100), maxMana(100), currentMana(100),
+                                                         maxExp(100), currentExp(0) {
     this->setupAnimations();
 }
 
@@ -94,27 +96,28 @@ void Player::handleTileCollisions(std::vector<Rectangle> &others) {
     // Figure out what side the collision happened on and move the player accordingly.
     for (int i = 0; i < others.size(); i++) {
         sides::Side collisionSide = this->getCollisionSide(others.at(i));
-        if (collisionSide != sides::NONE) {
-            switch (collisionSide) {
-                case sides::NORTH :
-                    this->y = others.at(i).getSouth() + 1;
-                    break;
-                case sides::SOUTH:
-                    this->y = others.at(i).getNorth() - this->boundingBox.getHeight() - 1;
-                    break;
-                case sides::WEST:
-                    this->x = others.at(i).getEast() + 1;
-                    break;
-                case sides::EAST:
-                    this->x = others.at(i).getWest() - this->boundingBox.getWidth() - 1;
-            }
+        switch (collisionSide) {
+            case sides::NONE :
+                break;
+            case sides::NORTH :
+                this->y = others.at(i).getSouth() + 1;
+                break;
+            case sides::SOUTH:
+                this->y = others.at(i).getNorth() - this->boundingBox.getHeight() - 1;
+                break;
+            case sides::WEST:
+                this->x = others.at(i).getEast() + 1;
+                break;
+            case sides::EAST:
+                this->x = others.at(i).getWest() - this->boundingBox.getWidth() - 1;
+                break;
         }
     }
 }
 
 void Player::handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics) {
     for (int i = 0; i < others.size(); i++) {
-        if(this->isInteracting) {
+        if (this->isInteracting) {
             room = Room(others.at(i).getDestination(), others.at(i).getPosition(), graphics);
             this->x = room.getPlayerSpawnPoint().x;
             this->y = room.getPlayerSpawnPoint().y;

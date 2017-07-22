@@ -9,7 +9,7 @@
 #include "player.h"
 #include "room.h"
 #include "graphics.h"
-
+#include "hud.h"
 
 class Game {
 public:
@@ -29,6 +29,8 @@ private:
     Player player;
 
     Room room;
+
+    Hud hud;
 
     Graphics graphics;
 };

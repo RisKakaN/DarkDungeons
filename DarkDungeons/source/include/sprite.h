@@ -31,6 +31,19 @@ public:
 
     const sides::Side getCollisionSide(Rectangle &other) const;
 
+    const inline float getX() const {
+        return this->x;
+    }
+
+    const inline float getY() const {
+        return this->y;
+    }
+
+    void setSourceRectX(int value);
+    void setSourceRectY(int value);
+    void setSourceRectW(int value);
+    void setSourceRectH(int value);
+
 protected:
     SDL_Texture *spriteSheet;
     SDL_Rect sourceRect;

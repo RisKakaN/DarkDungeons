@@ -45,12 +45,36 @@ public:
 
     void handleDoorCollision(std::vector<Door> &others, Room &room, Graphics &graphics);
 
-    const inline int getPlayerX() const {
+    const inline float getPlayerX() const {
         return this->x;
     }
 
-    const inline int getPlayerY() const {
+    const inline float getPlayerY() const {
         return this->y;
+    }
+
+    const inline int getMaxHealth() const {
+        return this->maxHealth;
+    }
+
+    const inline int getCurrentHealth() const {
+        return this->currentHealth;
+    }
+
+    const inline int getMaxMana() const {
+        return this->maxMana;
+    }
+
+    const inline int getCurrentMana() const {
+        return this->currentMana;
+    }
+
+    const inline int getMaxExp() const {
+        return this->maxExp;
+    }
+
+    const inline int getCurrentExp() const {
+        return this->currentExp;
     }
 
 private:
@@ -58,6 +82,12 @@ private:
 
     bool isInteracting;
 
+    int maxHealth;
+    int currentHealth;
+    int maxMana;
+    int currentMana;
+    int maxExp;
+    int currentExp;
 };
 
 
